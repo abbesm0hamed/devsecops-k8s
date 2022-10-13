@@ -46,8 +46,8 @@ pipeline {
     deploymentName = "devsecops"
     containerName = "devsecops-container" 
     serviceName = "devsecops-svc"
-    imageName = "siddharth67/numeric-app:${GIT_COMMIT}"
-    applicationURL="http://devsecops-demo.eastus.cloudapp.azure.com"
+    imageName = "abbes1/numeric-app:${GIT_COMMIT}"
+    applicationURL="http://localhost:5000"
     applicationURI="/increment/99"
     DOCKERHUB_CREDENTIALS=credentials("docker-access")
   }
