@@ -41,7 +41,7 @@
 
 pipeline {
   agent any
-  
+
   environment {
     deploymentName = "devsecops"
     containerName = "devsecops-container" 
@@ -49,7 +49,7 @@ pipeline {
     imageName = "siddharth67/numeric-app:${GIT_COMMIT}"
     applicationURL="http://devsecops-demo.eastus.cloudapp.azure.com"
     applicationURI="/increment/99"
-    DOCKERHUB_CREDENTIALS=credentials('docker-access')
+    DOCKERHUB_CREDENTIALS=credentials("docker-access")
   }
 
   stages {
@@ -107,11 +107,11 @@ pipeline {
 
     stage('Docker Build and Push') {
       steps {
-//         withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
+        withDockerRegistry([credentialsId: "abbes1", url: "https://hub.docker.com"]) {
           sh 'printenv'
           sh 'sudo docker build -t abbes1/numeric-app:""$GIT_COMMIT"" .'
           sh 'docker push abbes1/numeric-app:""$GIT_COMMIT""'
-//         }
+        }
       }
     }
 
