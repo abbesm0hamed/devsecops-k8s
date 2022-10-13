@@ -107,12 +107,12 @@ pipeline {
 
     stage('Docker Build and Push') {
       steps {
-//         withDockerRegistry([credentialsId: "abbes1", url: "https://hub.docker.com"]) {
+        withDockerRegistry([credentialsId: "docker-access", url: ""]) {  // specify the credential created to access the dockerHub wich is made of the username and password/token
           sh 'printenv'
           sh 'sudo docker build -t abbes1/numeric-app:""$GIT_COMMIT"" .'
           sh 'docker push abbes1/numeric-app:""$GIT_COMMIT""'
         }
-//       }
+      }
     }
 
  //    stage('Vulnerability Scan - Kubernetes') {
