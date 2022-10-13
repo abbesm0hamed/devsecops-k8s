@@ -44,7 +44,7 @@ pipeline {
 
   environment {
     deploymentName = "devsecops"
-    containerName = "devsecops-container"
+    containerName = "devsecops-container" 
     serviceName = "devsecops-svc"
     imageName = "siddharth67/numeric-app:${GIT_COMMIT}"
     applicationURL="http://devsecops-demo.eastus.cloudapp.azure.com"
