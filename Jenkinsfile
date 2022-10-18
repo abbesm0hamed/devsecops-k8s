@@ -67,26 +67,27 @@ pipeline {
       }
     }
 
- //    stage('Mutation Tests - PIT') {
- //      steps {
- //        sh "mvn org.pitest:pitest-maven:mutationCoverage"
- //      }
- //    }
+    stage('Mutation Tests - PIT') {
+      steps {
+        sh "mvn org.pitest:pitest-maven:mutationCoverage"
+      }
+    }
 
- //    stage('SonarQube - SAST') {
- //      steps {
- //        withSonarQubeEnv('SonarQube') {
- //          sh "mvn sonar:sonar \
-	// 	              -Dsonar.projectKey=numeric-application \
-	// 	              -Dsonar.host.url=http://devsecops-demo.eastus.cloudapp.azure.com:9000"
- //        }
- //        timeout(time: 2, unit: 'MINUTES') {
- //          script {
- //            waitForQualityGate abortPipeline: true
- //          }
- //        }
- //      }
- //    }
+    stage('SonarQube - SAST') {
+      steps {
+        withSonarQubeEnv('SonarQube') {
+          mvn clean verify sonar:sonar \
+            -Dsonar.projectKey=numeric-app \
+            -Dsonar.host.url=http://192.168.0.0:9000 \
+            -Dsonar.login=sqp_dfacc64cb20c11018e4c81c190e4fe1a42d695e7
+        }
+        timeout(time: 2, unit: 'MINUTES') {
+          script {
+            waitForQualityGate abortPipeline: true
+          }
+        }
+      }
+    }
 
 	// stage('Vulnerability Scan - Docker') {
  //      steps {
